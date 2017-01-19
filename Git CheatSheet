@@ -1,0 +1,554 @@
+Checkout Branch:
+	git checkout -b "..."
+	  	Examples: 
+		   git checkout -b master
+		   git checkout -b mainUserHtmlUpdate
+
+log:
+	git log
+
+
+git status:
+	gives information about what branch and files are commited and not tracked and whether there is a git repository
+
+
+git start:
+	starts a git repository
+
+====================================================================
+PUSH & PULL
+git remote -v:
+	list all remote repositories attached to current repository that you can push to and pull to.  -v stands for verbose
+
+git remote add git:url
+	adds git repository at the git:url
+        Example:  git remote add origin https://github.com/Gregg/git-real.git
+	
+
+git remote rm git:url
+	removes remote repository
+
+git push -u 'repoLabel' 'branch'
+	pushes updated files from local repository to remote repository branch
+	-u remembers the parameters for the repoLabel and branch so that next time you don't have to declare them you just say 'git push'
+	Example: git push -u origin master 
+
+git fetch 'repoLabel'
+	Command goes out to that remote project and pulls down all the data from the remote project that you don't have
+	you should get all the branches from that remote
+ 
+git merge master
+	pulls from master remote repository to make sure the master branches are equal
+
+git pull
+	pulls down all changes (especially if others have been working on project
+
+git pull 'repoLabel' 'branch'
+	pulls from the remote repository (with label name 'repoLabel') and from the particular branch(branch named 'branch')
+  	
+	Example: git pull labsights master
+
+'repoLabel' create
+	Adds a remote repository to your github
+	Example: newRemoteRepo create
+	Made a new remote repository on github called newRemoteRepo
+	Example: git push newRemoteRepo master
+	pushes local repo to newRemoteRepo
+	
+git stash
+	Saves current state of the working directory
+==========================================================================
+#ADD FILES to STaging area
+
+git add '*.txt'
+	Add all txt files to staging area
+
+git add FILENAME
+	Adds the file to the commit
+
+git add -A
+	stages All
+
+git add . 
+	stages new and modified, without deleted
+
+git add -u
+	Stages modified and deleted, without new, updates existing files
+
+=========================================================================
+git rm FILENAME
+	Removes the file from the commit
+
+
+
+git push 'reposLabel' 'branch'
+	push to the remote repository (with label name 'repoLabel') to the particular branch(named 'branch')
+	Example: git push origin master
+
+git push -u origin master
+	the name of the remote is origin and the default local branch anem is master.  The -u tells Git to remember the parameters, so that next time we can simply 
+	run git push and Git will know what to do.
+
+git push -f origin master
+	forces the push to your remote repository with label origin to the master branch.  
+
+git log
+	shows a list of all the commits, and you can compare the commits log# to what is on github to make sure your repository is in sync with the remote repositories
+
+git reset --hard 'log#'
+	resets master back to that particular log#
+
+git branch
+	command tells you what branch you are writing to
+
+
+git branch 'BRANCHNAME'	
+	commmand creates branch but does not switch to it
+
+============================================================================
+STAGING & REMOTES
+git diff
+	Show unstaged differences since last commit:
+	If you 'git add' unstaged files then if you git diff again those files will not be listed
+
+git diff --staged
+	It will list all staged files that you have added to the staging area since last commit
+
+
+git status
+	Will list staged and unstaged files and summary of your git repository
+
+git reset HEAD <FILENAME>
+	Will unstage a staged file
+
+git checkout -- <FILENAME>
+	Resets file to last commit  
+ 
+##BAD COMMITS----
+-----------------
+git rm FILENAME
+        Removes the file from the working tree and from the index (not sure how this works lol)
+
+
+git commit -a -m "Modify My tracked Files"
+	Does multiple commands: Add all modified tracked files and commits them, if the file is not tracked (new) if will not be commited
+	and it includes a commit message
+
+git reset --soft HEAD^
+	Moves commit to one before current HEAD and puts all the commited files back into staging so you can make the changes you wanted and then commit again
+
+git add todo.txt
+git commit --amend -m "Modify readme and & todo.txt"
+	If you forgot to add todo.txt to last commit, add it to the staging area with git add and then add option '--amend' and it will add the todo.txt to the last HEAD and 
+	then the message (-m) attached will replace the previous HEAD's message  
+
+git reset --hard HEAD^
+	Blows away the last commit (does not put the files committed in staging)
+
+git reset --hard HEAD^^
+	Blows away the last two commits (does not put the files committed in staging)
+
+
+-----------------------------------------
+===========================================================================
+CLONING & BRANCHING
+
+git clone https://github.com/codeschool/git-real.git
+	Clones the remote repository
+
+git branch cat
+	Creates a branch name cat
+
+git branch
+	gives a listing of branches and which one you are on
+
+git branch cat
+git checkout cat
+echo "Schrodinger" > cat.txt
+	create a cat branch and creates a text file named cat to the cat branch
+
+git checkout master
+git merge cat
+	merges cat branch to master
+
+git branch -d cat
+	Deletes cat branch
+
+
+git checkout -b admin
+	creates and checks out branch admin
+ 
+
+------------------------------------------
+REMOTE BRANCHES
+---------------
+
+git checkout -b shoppingCart
+git push origin shoppingCart
+	Create and switch to new branch
+	and then push branch to origin repo
+
+
+git remote show origin
+	shows all branches on remote repo origin and local
+	shows what is tracked
+	what local branches are configured for git pull
+	what local branches are configured for git push and which ones are out of date
+
+git push origin :shoppingCart
+	Deletes remote shoppingCart branch but it still exists locally
+
+git branch -d shoppingCart
+	Deletes local branch if it is fully merged but if there are uncommitted files it will not let you
+
+git branch -D shoppingCart
+ 	If you want to delete it anyway with the uncommitted files 
+
+
+git remote prune origin
+	If your remote branch is stale (deleted/removed) you won't be able to push to it, so you do git remote prune origin to clean up stale branches
+
+git chekcout staging
+git push heroku staging:master
+	heroku is a remote repo that only takes pushes to its master, so you have to transfer changes
+	from local branch staging to the remote heroku master branch
+
+==========================================================================
+	
+TAGGING
+
+git tag
+	list all tags: tags are a reference to a commit or a state or snapshot of the code that the the code was in when tagged (used mostly for release versioning)
+
+git checkout <tagName>
+	check out code at commit referenced by tag <tagName>
+
+git tag -a  <tagName> -m "version x.x.x"
+	adds a new tag and adds a message  of whatever version number you would like to call it
+
+git push --tags
+	pushes our tags to remote
+
+===========================================================================
+
+REBASES
+
+git fetch
+	gets all the changes from remote origin master but does not apply them to your master yet
+	
+
+git rebase
+	then applies all the fetched changes one at a time to your master and them applies your changes last to your master
+
+CONFLICT RESOLUTION
+-------------------
+
+git fetch
+	Get changes
+git rebase
+	Merge changes to master but there are conflicts
+git rebase --continue 
+	after you resolve conflict
+git rebase --skip
+	If you prefer to skp this patch
+git rebase --abort
+	check out the original branch and stop rebasing run
+
+--------------------------------------------------------------
+===============================================================================
+HISTORY & CONFIGURATION
+
+git log
+	list of commits
+git config --global color.ui true
+	formats log output, changes color of Commit SHA yellow
+
+git log --pretty=oneline
+	creates output on one line with the commit SHA followed by commit message
+
+git log --pretty=format: "%h %ad- %s [%an]"
+	formats log exactly how you want it 
+	%h - SHA hash
+	%ad - author date
+	%an - author name
+	%s - subject
+	%d - ref names
+
+git log --oneline -p
+	-p stands for patch
+	it shows you what changes were included with each commit patch
+
+git log --oneline -stat
+	tells you how many insertions and deletions per file that were changed with each commit patch
+
+git log --oneline --graph
+	visual representation of the branch merging into master
+
+RANGES
+---------
+git log --until=1.minute.ago
+git log --since=1.day.ago
+git log --since=1.hour.ago
+git log --since=1.month.ago --until=2.weeks.ago
+git log --since=2000-01001 --until=2012-12-21
+
+COMPARING BTW NOW & PREVIOUS HEADS
+------------------------------------
+git diff 
+git diff HEAD
+	Both commands are the same - compares now with last HEAD
+
+git diff HEAD^
+	compares now with HEAD before last
+git diff HEAD^^
+	compares now with HEAD before, HEAD before last 	
+git diff HEAD^^ ..HEAD^
+	compares HEAD before, HEAD before last to HEAD before last
+git diff HEAD~5 ..HEAD^
+ 	compares 5 commits ago to the HEAD before last
+
+git diff SHA1 SHA2
+	compares two SHAs
+git diff master Cookie
+	compare master branch to the Cookie branch 
+
+git diff --since=1.week.ago --until=1.minute.ago
+	compare 1 week ago to one minute ago
+
+BLAME
+-----
+git blame index.html --date short
+	you can run blame on a file and it will tell you who made what change to what line and the content of the line
+
+==================================================================
+EXCLUDING FILES
+----------------
+.git/info/exclude
+	Add name of folder to .git/info/exclude file and that folder will not appear
+ 	just add ----->	experiments/
+
+git status
+	when you run git status you won't see that folder
+
+GIT IGNORE FILES
+---------------- 
+never includ files in git
+always exclude log files because they create conflicts because everyone has their own log issues
+
+in the .gitignore file put
+logs/*.log
+
+
+REMOVING FILES
+---------------
+git rm README.txt
+	pass git rm a file or a folder and when you commit it gets removed from repository 
+
+UNTRACKING FILES
+git rm --cached development.log
+	stop tracking/watching for changes with development.log
+
+logs/*.log
+	Add to .gitignore
+	
+git commit -m "Ignore all log files"
+	you can then still add it to .gitignore file and then you will not track any log files anymore
+
+CONFIGURATION
+-------------
+git config --global core.editor emacs 
+	use emacs for interactive commands
+
+git config --global merge.tool opendiff	
+	use opendiff for merging conflicts
+	
+	
+ALIASES
+--------
+git config --global alias.mylog \
+"log --pretty=format: '%h %s [%an]' --graph"
+
+git config --global alias.lol \
+"log -=-graph --decorate --pretty=oneline --abbrev-commit --all"
+
+git config --global alias.st status 
+	shorten calling git status to git st
+git config --global alias.co checkout
+	shortens git checkout
+git config --global alias.br branch
+	shortens git branch
+git config --global alias.ci commit
+	shortens git commit
+
+
+=====================================================================================
+INTERACTIVE REBASE
+------------------
+
+git rebase -i HEAD
+        does nothing because there are no commits after the HEAD
+
+git rebase -i HEAD^
+        replays the last commit onto current branch
+
+
+git rebase -i HEAD~3
+	redo the last 3 commits from master on to the current branch
+	CHANGING THE ORDER OF THE COMMITS -------------
+	shows commits from oldest to newest in editor
+	if you change the order of the picks and save the script it will change the order in which 
+        the picks are played on current branch
+	-------------------------------------------------
+	
+	CHANGING THE COMMIT MESSAGE ---------------
+	in the editor change the work pick to reword and edit the message and it will replay the 
+	commits on the current branch but with the new commit message
+	----------------------------------------------------
+
+
+	SPLITTING COMMIT INTO MULTIPLY COMMITS ------------------
+	If you want to split a commit into two separate commits
+	
+	git rebase -i HEAD~3 ****** in the editor change the word pick to edit,
+	when you save the script runs till it hits the commit/pick
+
+	that is annotated with the word edit.  Then you run
+	
+	git reset HEAD^ ********************************	 which places the files to be commited into a working directory (
+	
+	git status *************************************	 you will see file1 and file2 as unstaged
+	
+	git add file1 **********************************	 stages file1 for the commit which is the first half of the commit split
+	
+	git commit -m "Commit Split 1/2 -- file1" ****** 	 commits first half of split
+	
+	git add file2 **********************************	 stages file2 for the commit which will be the second half of the commit split
+	
+	git commit -m "Commit Split 2/2 -- file2" ****** 	 commits second half of split
+
+	git add file3 **********************************	 to stage file3 if you want to add file to last commit (Commit Split 2/2)
+
+	git commit --amend -m "Commit Split 2/2 + file3" **	 to add files to last commit and edit commit message
+
+	git rebase --continue **************************	 finally continues with the rebase 
+	
+	git log --oneline ******************************	 to verify new commits
+	------------------------------------------------------------------------------
+
+
+	GIT SQUASH ---------
+	If you want to merge multiply commits into a single commit
+
+	git rebase -i HEAD~4 ***************************	will replay last four commits in editor it will say
+				
+					pick 44d59fa Add capybaras page
+					pick 7d2edea Add capybaras to index
+					pick 6e8e5d6 Change plural on detail page to 'capybara'
+					pick e8005f4 Change plural on index page to 'capybara'
+									
+								remember this is from oldest to newest
+								to flatten/squash newer commit back into (merges into) older commit
+		
+					pick 44d59fa Add capybaras page
+                                        pick 7d2edea Add capybaras to index
+                                        pick 6e8e5d6 Change plural on detail page to 'capybara'
+                                        squash e8005f4 Change plural on index page to 'capybara'
+	
+
+	git log --oneline *****************************		to verify new commits: should be from newest to oldest
+		
+					4ce2156 Change plural on detail page to 'capybara'	
+					2a7d18z Add capybaras to index
+					68zi39l Add capybaras page
+	
+
+
+
+
+=====================================================================================================================
+GIT STASH
+----------
+
+git stash save  // git stash
+	Saves working directory away and restores last commit.  All your changes since the last commit are some stashed away and saved
+	to a stack 
+
+git stash list
+	Gives you a list of the stashes saved on the stash stack - list includes stash#, branch, commit, commit message
+
+git stash apply stash@{#} 
+	Runs the changes you stashed on the stash stack 
+
+git stash apply
+	Runs the changes at the top of the stash by running the command
+		git stash apply stash@{0}
+git stash drop
+	Pops stashes off the stash list
+
+git stash pop
+	Runs both commands to apply last stash at the top of the stack and then drops the stash
+		git stash apply
+		git stash drop
+
+git stash save  "MESSAGE"
+	By adding in a message when you save a stash it also provides more clarity to what is happening in that particular stash
+
+
+
+==========================
+GIT STASH PROBLEM SOLVING
+-------------------------
+
+
+GITTING STASH INFORMATION
+------------------------------------------
+git stash list --stat
+	If you cannot figure out which stash you want to apply, you can get more information on the stash
+	by listing the stash stach and adding the option --stat 
+
+git stash show stash@{0}
+	to show stats on a particular stash 
+
+git stash show 
+	will show stats on the most recent stash
+
+
+git stash show stash@{2} --patch
+	--patch option will show all the file changes for that particular patch
+
+
+--------------------------------------------
+
+
+GITTING STASH CONFLICTS
+------------------------------------------
+****IF git stash doesn't work 
+	(error: Your local changes to the following files would be over written by merge...
+	Please commit your changes or stash them before you can merge )
+You will have to commit 
+	git commit -m
+or reset to last commit
+	git reset --hard HEAD
+to be able to run git stash successfully
+
+
+****If you accidentally delete the branch you have stashed to then you can
+	git stash branch 'branchName' stash@{0}
+git stash branch creates a new branch named branchName and then pops stash@{0} off of the stash but it also automatically 
+deletes the stash from the stack
+
+
+
+git stash  save --keep-index
+	--keep-index option causes the staging area not to be stashed
+
+git stash save --include-untracked
+	--include-untracked allows for the untracked files to be stashed too
+
+-------------------------------------------------
+
+
+git stash clear
+	blows away all your stashes
+	you can check your stash list by running 'git stash list'
+
