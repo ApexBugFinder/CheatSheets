@@ -1,0 +1,92 @@
+===========================================
+xterminal window layout Commands
+
+ctrl + shift + o:
+	adds horizontal pane
+
+ctrl + shift + e:
+	adds vertical pane
+
+ctrl + shift + d:
+	deletes current window
+
+ctrl + shift + p:
+	cycles through window
+
+
+=================================================
+TERMINAL COMMANDS
+
+history:
+	lists all commands that have been given
+
+ls -al
+	Shows all in directory
+
+ls -F 
+	Shows all files
+
+ls -i sample.txt
+	-i Shows inode number of a file
+
+echo "Schrodinger" > cat.txt
+	Creates a text file called cat with the string "Schrodinger" in it
+
+cat cat.txt
+	prints to terminal contents of cat.txt
+
+grep -r "text"
+	Searches for all occurances of the the text string
+
+
+MOVE EXAMPLES
+---------------
+# Move File - file is located two directories up and in the Documents folder
+	mv <FILE> <NEW LOCATION>
+	mv help.txt ../../Documents
+# Move all files 
+	mv * ../../Documents
+
+#  MOVE -u option example 
+# '-u' copies only files that don't exist in destination directory, updates directory with new files
+
+$ ls chap1
+ex1    ex2    ex3
+
+$ ls chap2
+ex1
+
+$ mv -u chap1/* chap2/
+
+$ ls chap1
+ex1
+
+$ ls chap2
+ex1    ex2    ex3
+------------------------------------
+
+RENAME EXAMPLE
+--------------
+
+mv dir1 dir2
+	Renames dir1 to dir2
+
+
+mv sample1.txt sample2.txt
+	Renames sample1.txt to sample2.txt
+
+==============================================
+DELETE COMMANDS
+------------------
+yy - yank (copy) a line.
+2yy - yank (copy) 2 lines.
+yw - yank (copy) the characters of the word from the cursor position to the start of the next word.
+y$ - yank (copy) to end of line.
+p - put (paste) the clipboard after cursor.
+P - put (paste) before cursor.
+dd - delete (cut) a line.
+
+
+===========================================
+FIND APPLICATION WINDOW INFORMATION
+xprop
