@@ -1,0 +1,39 @@
+:
+	To toggle commands bar at bottom
+
+
+:w
+	to write to file
+
+
+:q	
+	to quit
+
+
+:q!	
+	to quit with no saved changes
+
+
+:wq	
+	to write to file and quit
+
+
+dd	
+	to delete entire line
+
+
+3dd
+	to delete following 3 lines
+
+
+fn + left
+	to got to beginning of the line
+
+
+fn + right
+	to go to the end of the line
+
+
+
+	
+
