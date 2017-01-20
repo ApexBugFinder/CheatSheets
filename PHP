@@ -1,0 +1,103 @@
+PHP - Server side scripting language
+
+helps you talk to server - high performance and scalable
+
+to create a php file you can save file (or html file)  with a php extension
+PHP reads html, so nothing changes
+
+When a server sees a php file it:
+	Validates file - checks to see if syntax is correct
+	Compiles all code
+	And sends back newly generated output to browser
+
+php Code Block:
+	<?php "Anything in here will be seen as php and compiled by server  ?>
+	Can go anywhere in file 
+	Can be separated into multiple parts and sections and all sections will reference each other withou
+	any problems
+
+
+	
+	to delete entire line
+	to delete entire line
+; 
+	ends every line of code
+
+
+echo 
+	outputs anything that follow
+
+============
+VARIABLES 
+-----------------
+
+
+$ 
+	varibles all start with the dollar sign
+
+$first_name = 'Bob';
+	variables can be two words separated by underscore
+	start with dollar signs
+	cannot start with number or letter
+	cannot use hyphen
+	assign a string is done with single quotes
+	double quotes are used only when evaluting a string
+
+echo $first_name;
+	will display: 
+		Bob
+
+===================
+STRINGS & DATA
+------------------
+
+concantenation
+Single Quotes-
+--------------
+<?php echo 'Mentor name:' . $name ; ?>
+	the period concantenates the string 
+	displays as:
+	Mentor name: Bob
+
+Double Quotes -
+----------------
+<?php echo "Mentor name: $name"; ?>
+	the double quotes allows for varibles to be recognized in the string
+
+
+==================
+ARRAYS
+------------------
+
+Defining new arrays
+	$meteors = array();
+	$meteors = [];
+	$meteors = array('Hoba', 'Bob', 'Jane');
+	$meteors = ['Hoba', 'Bob', 'Jane');
+
+print_r($meteors);
+	Print human readable output of the $meteors array
+	prints out the key and value
+
+Add (append)  Values to an existing array
+	$meteors[] = ('Karen');
+	$meteors[] = ('Sokajuweeah');
+	
+Editing Array	
+	$meteors[3] = 'Peter';
+
+Associative Arrays 
+------------------
+
+Defining an associative array
+	$meteors =array('name' => 'Bob', 'age' => 35, 'favorite color' => 'blue');
+
+Editing an associative array
+	$meteors['age'] = 42;
+
+Appending to an associative array
+	$meteors['car'] = 'honda accord';
+	$meteors['happy'] = 'no';
+
+	 
+
