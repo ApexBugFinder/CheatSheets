@@ -100,4 +100,113 @@ Appending to an associative array
 	$meteors['happy'] = 'no';
 
 	 
+Multidimensional Array
+----------------------
+Example
+$games = array(
+	'tabletop' => array(
+		'sorry',
+		'life',
+		'scrabble'
+		),
+	'card' => array(
+		'poker',
+		'black jack'
+);
+
+print_r($games['tabletop']);
+	Print all the games that are tabletop games 
+
+print_r($games['card']);
+	Print all the games that are card games
+
+echo $games['tabletop'][0];
+	Print a single value of an array use echo not print_r	
+	Prints the game 'sorry'
+
+
+$games['card'][1] = 'rummy';
+	Changes black jack to rummy
+
+
+echo count($games['card']);
+	Counts up the number of card games you have
+
+$people = array(
+	'David',
+	'Jennifer',
+	'Falken',
+	'Joshua'
+	);
+
+echo implode(' ', $people);
+	Joins all the elements in the people array into a single string with a space character that separates the element;
+	"David Jennifer Falken Joshua" is the result
+
+shuffle($people);
+echo implode(' ', $people);
+	shuffle function modifies the function in place (randomizes the elements and then resaves itself) and then 
+	implode prints the new randomized version of $people array to a single string with elements separated by the 
+	space character
+
+==========================
+CONDITIONALS & OPERATORS
+---------------------------------------------------
+
+== EQUALS
+>= GREATER THAN OR EQUALS
+<= LESS THAN OR EQUALS
+
+
+iDENTICAL COMPARISONS
+=== EQUAL TO AND SAME DATA TYPE
+	5 === '5' IS FALSE
+
+CONTROL FLOW
+--------------
+if statements 
+and if else statements
+elseif statements
+
+
+LOGICAL OPERATORS
+-----------------
+&& AND statement
+|| OR Statement
+! not statement
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
