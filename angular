@@ -1,0 +1,479 @@
+mIRECTIVES:
+A directive is a marker on a HTML tag that tells Angular to run or reference some Javascript code.
+
+Example:
+HTML -
+<body ng-controller="StoreController>
+
+JAVASCRIPT CODE -
+function StoreController(){
+  alert('Welcome, Orville!');
+}
+
+explanation of example -
+ng-controller in the HTML is the directive
+
+=============================================
+MODULES:
+
+Definition -
+Where we write pieces of our Angular application
+Makes our code more maintainable, testable, and readable
+Where we define dependencies for our app.
+Modules can use other modules.
+
+
+Example -
+JAVASCRIPT CODE = 
+[in file app.js]
+var app = angular.module('store', [ ]);
+
+HTML =
+<body>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+explanation -
+use the angularjs builtin function angular.module to define and register the module (store) and 
+list any of its dependencies that it would require to run in the brackets ([ ]).
+
+On the html side declare using scripts tag <scripts> that you will be using the angular.min.js library and also
+for the app.js file
+
+
+===============================================
+INCLUDING A MODULE
+
+Example
+<!DOCTYPE html>
+<html ng-app="store">
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+  </head>
+  <body>
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
+
+Explanation:
+Add the ng-app="store" to the tag the html tag.  store is the title of the angular module
+that is being declared in the app.js file.
+
+================================================
+WORKING WITH DATA
+
+Example:
+
+JAVASCRIPT -
+
+@1: (function(){
+  var app = angular.module('store', [ ]);
+
+@2:  app.controller('StoreController', function(){
+    this.product = gem;
+  });
+
+  var gem = {
+    name: 'Dodecahedron',
+    price: 2.95,
+    description: '. . .', 
+  }
+})();
+
+HTML -
+<!DOCTYPE html>
+@3: <html ng-app="store">
+  <head>
+   @4: <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+  </head>
+  <body>
+   @5: <div ng-controller="StoreController as store">>
+      <h1> {{store.product.name}} </h1>
+      <h2> {{store.product.price}} </h2>
+      <p> {{store.product.description}} </p>
+    </div>
+   @6:  <script type="text/javascript" src="angular.min.js"></script>
+
+Explanation:
+@1: it is good practice to wrap your javascript in a closure, it is a good habit!
+
+@2: The controller is attached to inside our app.  Controllers are where we 
+define our apps behavior by defining functions and values.  The controller will supply the data
+to the frontend.
+
+@3: on HTML side include the application to section application is used on  or html tag
+
+@4:  include a link to bootstrap in the head
+
+@5:  attach the controller to the section that is the data is supplied to.  Scope of the controller
+is limited to the div that it is declared in
+
+@6:  include link to the angular.min.js file in a script tag.
+
+
+================================
+NgShow Directive
+---------------- 
+ng-show - shows the element if true
+example: 
+var gen = {
+  name: 'Dodecahedron',
+  price: 2.95,
+  description: '....',
+  canPurchase: false
+}
+<button ng-show="store.product.canPurchase"> Add to Cart </button>
+
+explanation: 
+if the value in the variable canPurchase is true then the 'Add to Cart' button will show
+
+HTML
+
+<body ng-controller="StoreController as store">
+
+  <!--  Products Container -->
+  <div class="list-group">
+    <!--Product Container -->
+    <div class="list-group-item">
+      <h1>{{store.product.name}}</h1>
+      <h2>{{store.product.price}}</h2>
+      <p>{{store.product.description}}</p>
+      <button ng-show="store.product.canPurchase">Add to Cart</button>
+    </div>
+  </div>
+</body>
+
+===============================
+NgHide Directive
+----------------
+
+example:
+var gem = {
+  name: 'Dodecahedron',
+  price: 2.95,
+  description: '...', 
+  canPurchase: true,
+  soldOut: true
+}
+
+<div ng-hide="store.product.soldOut">
+
+explanation:
+the list item is hidden when the varible soldOut is true
+
+HTML
+<body ng-controlle="StoreController as store">
+  
+  <!-- Products Container -->
+  <div class"list-group">
+    <!-- Product Container -->
+    <div class="list-group-item" ng-hide="store.product.soldOut">
+      <h1> {{store.product.name}}</h1>
+      <h2> {{store.product.price}}</h2>
+      <p>  {{store.product.description}} </p>
+      <button ng-show="store.product.canPurchase"> Add to Cart </button>
+    </div> //closes list-group item
+  </div>  //closes list-group
+ 
+   <script type="text/javascript" src="angular.min.js"></script>
+   <script type="text/javascript" src="app.js"></script>
+</body>
+
+
+==============================
+Working with an array
+NgRepeat Directive
+----------------------
+example -
+<body ng-controller="StoreController as store">
+  @1: <div ng-repeat="product in store.products">
+    @2: <h1> {{product.name}} </h1>
+        <h2> {{product.price}} </h2>
+        <p>  {{product.description}} </p>
+        <button ng-show="product.canPurchase">  Add to Cart </button>
+      </div>
+
+explanation - 
+@1:  Use the ng-repeat directive to initialize each array item as a local variable
+called product.  
+@2:  Everytime it iterates through the array it loads the array item as product.  You can call the different varibles within array through the product variable.
+
+================================
+Filters
+example -
+<body ng-controller="StoreController as store">
+  <ul class="list-group">
+    <li class="list-group-item" ng=repeat="product in store.products">    
+ @1: <h3> {{product.name}}  <em class="pull-right">{{product.price | currency}}
+          </em>
+     </h3>
+    </li>
+  </ul>
+</body>
+
+explanation -
+@1:  when the price is pulled from the variable product.price the value is
+     piped into a internal function called currency that filters and formats the     numbers into dollars and two significant digits
+
+template:
+{{ data* | fileter:options* }}
+
+date:
+{{'1388123412323' | date:'MM/dd/yyyy @ h:mma'}}
+12/27/2013 @ 12:50AM
+
+uppercase & lowercase
+{{'octagon gem' | uppercase}}
+OCTAGON GEM
+
+limitTo
+{{'My Description' | limitTo:8}}
+writes on the first 8 characters
+My Descr
+
+<li ng-repeat="product in store.products | limitTo:3">
+lists only the the first three items in array of products
+
+orderBy
+<li ng-repeat="product in store.products | orderBy:'-price'">
+list all the products but by descending order of the price because of the
+negative sign infront of price
+
+===================================
+Adding an Image Array to our Product Array
+
+example -
+var gems = [
+   { name: 'Dodecahedron Gem',
+     price: 2.95,
+     description: '...',
+     images: [   
+        {
+           full: 'dodecahedron-01-full.jpg',
+           thumb: 'doecahedron-01-thumb.jpg
+        },
+        {
+           full: 'dodecahedron-02-full.jpg',
+           thumb: 'dodechedron-02-thumb.jpg'
+        }
+     ]
+   }
+
+Displaying first image -
+{{ product.images[0].full}}
+
+example -
+
+<body ng-controller="StoreController as store">
+    <!--Product Container -->
+    <div class="list-group-item">
+      <h1>{{store.product.name}}</h1>
+      <h2>{{store.product.price}}</h2>
+      <p>{{store.product.description}}</p>
+      <button ng-show="store.product.canPurchase">Add to Cart</button>
+    </div>
+  </div>
+</body>
+
+===============================
+NgHide Directive
+----------------
+
+example:
+var gem = {
+  name: 'Dodecahedron',
+  price: 2.95,
+  description: '...', 
+  canPurchase: true,
+  soldOut: true
+}
+
+<div ng-hide="store.product.soldOut">
+
+explanation:
+the list item is hidden when the varible soldOut is true
+
+HTML
+<body ng-controlle="StoreController as store">
+  
+  <!-- Products Container -->
+  <div class"list-group">
+    <!-- Product Container -->
+    <div class="list-group-item" ng-hide="store.product.soldOut">
+      <h1> {{store.product.name}}</h1>
+      <h2> {{store.product.price}}</h2>
+      <p>  {{store.product.description}} </p>
+      <button ng-show="store.product.canPurchase"> Add to Cart </button>
+    </div> //closes list-group item
+  </div>  //closes list-group
+ 
+   <script type="text/javascript" src="angular.min.js"></script>
+   <script type="text/javascript" src="app.js"></script>
+</body>
+
+
+==============================
+Working with an array
+NgRepeat Directive
+----------------------
+example -
+<body ng-controller="StoreController as store">
+  @1: <div ng-repeat="product in store.products">
+    @2: <h1> {{product.name}} </h1>
+        <h2> {{product.price}} </h2>
+        <p>  {{product.description}} </p>
+        <button ng-show="product.canPurchase">  Add to Cart </button>
+      </div>
+
+explanation - 
+@1:  Use the ng-repeat directive to initialize each array item as a local variable
+called product.  
+@2:  Everytime it iterates through the array it loads the array item as product.  You can call the different varibles within array through the product variable.
+
+================================
+Filters
+example -
+<body ng-controller="StoreController as store">
+  <ul class="list-group">
+    <li class="list-group-item" ng=repeat="product in store.products">    
+ @1: <h3> {{product.name}}  <em class="pull-right">{{product.price | currency}}
+          </em>
+     </h3>
+    </li>
+  </ul>
+</body>
+
+explanation -
+@1:  when the price is pulled from the variable product.price the value is
+     piped into a internal function called currency that filters and formats the     numbers into dollars and two significant digits
+
+template:
+{{ data* | fileter:options* }}
+
+date:
+{{'1388123412323' | date:'MM/dd/yyyy @ h:mma'}}
+12/27/2013 @ 12:50AM
+
+uppercase & lowercase
+{{'octagon gem' | uppercase}}
+OCTAGON GEM
+
+limitTo
+{{'My Description' | limitTo:8}}
+writes on the first 8 characters
+My Descr
+
+<li ng-repeat="product in store.products | limitTo:3">
+lists only the the first three items in array of products
+
+orderBy
+<li ng-repeat="product in store.products | orderBy:'-price'">
+list all the products but by descending order of the price because of the
+negative sign infront of price
+
+===================================
+Adding an Image Array to our Product Array
+panel's tab property then the isSelected function will return the boolean true value7.  The boolean value from 6: the returned value of the panel's isSelected 
+function is used with the ngShow directive to show the contents of the panel div
+
+=====================
+ngModel Directive
+
+ngModel binds the form element value to the controller prorperty
+
+example
+<textarea ng-model="review.body"></textarea>
+
+====================================
+
+VALIDATIONS
+------------
+- novalidate - tells form to not use build in validation and to use angular validation
+- required - the form will not submit without these fields validated
+- .ng-invalid/.ng-valid
+- .ng-dirty/.ng-pristine
+- reviewForm.$valid
+
+
+example
+--------
+<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)" novalidate>
+	<select ng-model="reviewCtrl.review.stars" required>
+		<option value="1">1 star</option>
+		<option value="2">2 star</option>
+		<option value="3">3 star</option>
+	</select>
+	<textarea name="body" ng-model="reviewCtrl.review.body" required></textarea>
+	<label>by:</label>
+	<input name="author" ng-model="reviewCtrl.review.author" type="email" required/>
+
+	<div> reviewForm is {{reviewForm.$valid}} </div>
+	<input type="submit" value="Submit">
+</form>
+
+explanation: 
+- novalidate deprecates built in browser validation and gives power of validation to angular engine
+- required - tells the form which fields must be selected or filled out before the form can be submitted
+- the author input field is type="email" and angular will use built in regex to validate the input's string format
+- angular also validates type="url", type="number"
+
+
+
+==========================================
+DIRECTIVES - building custom directives
+==============
+
+types of custom directives
+- template-expanding directives
+	~ define custom tag or attribute that is expanded or replaced
+	~ can include Controller logic if needed
+	~ expressing complex UI
+	~ Reusing common components
+
+
+Tepmplate-expanding directives
+- ng-include - expects name of file as variable
+
+example code
+------------
+<ul class="list-group">
+	<li class="list-group-item" ng-repeat="product in store.products">
+		<h3 ng-include="'product-title.html'"> </h3>
+	<section ng-controller="PanelController as panel".....
+
+file: product-title.html
+----------------------
+{{product.name}} 
+<em class="pull-right">${{product.price}}</em> 
+
+code explanation:
+-----------------
+the ng-include is used in templates to call in a piece of reuseable html into a tag.  For this example it displays
+in the product name and price template from the file product-title.html
+
+CREATING CUSTOM DIRECTIVE
+--------------------------
+instead of using ng-include you can create a custom directive
+
+html
+----
+<product-title></product-title>
+
+angular javascript code
+-----------------------
+app.directive('productTitle', function(){
+	return {
+	   restrict: 'E', 
+	   templateUrl: 'product-title.html'
+	};
+});
+
+- this does the same thing as ng-include="'product-title.html"
+- if you notice the dash in product-title tag translates to camelCase in javascript app.directive('productTitle'....
+- restrict: 'E' means element, there are two choices, element vs attribute
+	~ 'E' - element us used for creating elements like paragraphs headings 
+	~ 'A' - attribute option is primarily used for mixins and for adding css attributes and influencing the behavior of the UI.
+
+
+ 

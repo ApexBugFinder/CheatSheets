@@ -1,0 +1,8 @@
+docker-compose up -d
+	to start docker
+
+docker-compose down
+	to stop docker
+
+
+

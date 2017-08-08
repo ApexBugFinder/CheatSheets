@@ -552,3 +552,20 @@ git stash clear
 	blows away all your stashes
 	you can check your stash list by running 'git stash list'
 
+
+
+---------------------------------------
+PURGING HISTORY
+=======================================
+
+If you write something to git that should not be there (like your passwords file) 
+then you need to delete if from the history so that no one ever knows it was there,
+then you need to purge history so that Github does not keep a record of the file.  
+
+
+Before you purge you probably want to back-up your repo by cloning it
+
+git clone repoName backup-repoName
+
+
+
