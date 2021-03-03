@@ -1,0 +1,250 @@
+flex-grow
+The flex grow property controls the size of items when the parent container expands.
+
+#box-container {
+ display:flex;
+ height: 500px;
+
+}
+#box-1 {
+ height: 200px;
+ flex-grow:1;
+}
+
+#box-2 {
+ height: 200px;
+ flex-grow:2;
+}
+
+----------------------------------
+flex-shrink
+
+it allows an item to shrink if the container is too small. Items shrink when the width of the paretn container is smaller than the combined widths of the flex items within
+
+
+
+#box-container {
+ display:flex;
+ height: 500px;
+ flex-grow:2;
+}
+#box-1 {
+ height: 200px;
+ width: 100%;
+ height: 200px;
+ flex-shrink: 1;
+}
+
+#box-2 {
+ height: 200px;
+ width: 100%;
+ height: 200px;
+ flex-shrink: 4;
+}
+
+
+
+
+----------------------------------------
+flex-basis:
+the flex-basis property specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex grow.
+
+#box-container {
+ display:flex;
+ height: 500px;
+
+}
+#box-1 {
+ height: 200px;
+ flex-basis:10em;
+}
+
+#box-2 {
+ height: 200px;
+ flex-basis: 20em;
+}
+
+---------------------------------
+
+Flex shorthand Property
+
+the shortcut available to set serveral flex properties at once:  The flex-grow, flex-shrink, and flex-basis
+
+flex: 1 0 10px;
+flex-grow: 1;
+flex-shrink: 0;
+flex-basis: 10px;
+
+
+-----------------------------------
+Order property to rearrange items
+ 
+
+#box-container {
+ display:flex;
+ height: 500px;
+
+}
+#box-1 {
+ height: 200px;
+ width: 200px;
+ background-color: dodgerblue;
+ order: 2;
+}
+
+#box-2 {
+ height: 200px;
+ background-color: orangered;
+ width: 200px;
+ height: 200px;
+ order: 1;
+}
+
+
+=---------------------------------------
+Align-Self property
+This property allows you to adjust each item's alignment individually, instead of setting them all at once.  
+Float clear and vertical-align do not work on flex items
+align-self accepts same values as align-items and will override any value set my align-items property
+
+
+#box-container {
+ display:flex;
+ height: 500px;
+
+}
+#box-1 {
+ height: 200px;
+ width: 200px;
+ background-color: dodgerblue;
+ align-self: center;
+}
+
+#box-2 {
+ height: 200px;
+ background-color: orangered;
+ width: 200px;
+ height: 200px;
+ align-self: flex-end;
+}
+
+-----------------------------------------------
+Align Elements with Justify-Content Property
+
+There are several options for how to space the flex items along the line that is a main axis (horizonatally)
+justify-content: center;   -------aligns all flex items to the center inside flex container
+
+flex-start
+flex-end
+space-between
+space-around
+space-evenly
+
+
+		
+
+-----------------------------------------------
+Align Elements with Align-items
+
+Property to align flex items along the cross axis (vertically)
+
+align-items: center; --- aligns all flex items to the center inside flex controller vertically
+flex-start
+flex-end
+center
+stretch
+baseline		
+
+
+--------------------------------------------------
+CSS Grid units
+grid-template-columns: auto 50px 10% 2fr 1fr;
+
+auto: the first column is as wide as its content
+50px: the second column is 50px wide.
+10%:  the third column is 10% of its container width
+last two columns are divided into 3 equal sections
+2fr: two of the sections are allocated to column 4
+1fr: one of the sections is allocated to column 1
+
+-----------------------------------------------------
+Grid column gap 
+gap between the columns - self explanatory
+
+grid-column-gap: 20px;
+
+--------------------------------------------------------	
+Grid Row Gap
+gap between the rows
+
+grid-row-gap: 5px;
+
+-----------------------------------------------------
+Grid Gap Shortcut
+
+grid-gap: 10px 20px;
+
+grid-gap-row: 10px;
+grid-gap-column: 20px;
+
+----------------------------------------------------
+Grid Spanning Elements
+
+grid-column: 1 / 3;
+     1    2    3    4
+1    l    l    l    l
+2    l    l    l    l
+3    l    l    l    l 
+4    l    l    l    l
+
+
+This will make the item start at the first vertical line of the grid on the left and span to the 3rd line of the grid consuming two columns
+
+grid-row: 2/4;
+Grid row works the same as grid column
+
+---------------------------------------------------------
+
+
+Align an Item Horizonatlly using justify-self
+
+You can align the content's position within its cell horizontally usingg the justify -self property on a grid item.
+
+justify-self: center;  --   aligns to center
+start: aligns to left of cell
+end: aligns to right of cell
+stretch: default value;
+
+-----------------------------------------------
+
+justify-self - horizontal align
+align-self- vertical align
+
+justify-items: horizontal align
+align-items: vertical align
+
+-----------------------------------------------------------
+Use Grid-area Without Creating an Areas Template;
+
+item 1 { grid-area: 1/1/2/4; }
+
+grid-area: horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at;
+
+---------------------------------------------------------
+
+USE media QUERIES TO CREATE RESPONSIVE LAYOUTS
+
+@media (min-width: 400px) {
+.container {
+grid-template-areas:
+   "header header"
+   "advert content"
+   "advert footer"
+
+
+}
+Whe the viewport is  400px or more, container class shoud have a grid-template-areas in which the header and footer areas occupy the top and bottom rows respectively
+}
+
+
+
